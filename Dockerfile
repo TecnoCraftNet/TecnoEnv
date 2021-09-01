@@ -1,11 +1,12 @@
-FROM ubuntu:20.04
+FROM alpine:latest
 
 EXPOSE 25565
 
-RUN apt update
-RUN apt-get install -y wget
-RUN apt-get install -y nano
-RUN apt-get install -y openjdk-8-jdk
+RUN apk update
+RUN apk add wget
+RUN apk add nano
+RUN apk add openjdk8
 
-ENV TZ=Europe/Rome
-RUN ln -snf /usr/share/zoneinfo/$TZ /etc/localtime && echo $TZ > /etc/timezone
+RUN apk add tzdata
+RUN cp /usr/share/zoneinfo/Europe/Rome /etc/localtime
+RUN echo "Europe/Rome" >  /etc/timezone
